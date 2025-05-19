@@ -2,13 +2,13 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-# Cargar datos
+#Cargar datos
 df = pd.read_csv("vehicles_us.csv")
 
-# Filtrar precios razonables (entre 500 y 100,000 dólares)
+#Filtrar precios razonables (entre 500 y 100,000 dólares)
 df = df[(df["price"] >= 500) & (df["price"] <= 100000)]
 
-# --- Gráfica 1: Precio promedio por Año del Modelo ---
+#Gráfica 1: Precio promedio por Año del Modelo 
 st.header("Relación entre Año del Modelo y Precio")
 df_grouped_year = df.groupby("model_year", as_index=False)["price"].mean()
 fig_year = px.bar(df_grouped_year, x="model_year", y="price", title="Precio Promedio por Año del Modelo")
@@ -16,22 +16,21 @@ st.plotly_chart(fig_year)
 st.markdown("**Insight:** Los vehículos más recientes tienden a tener precios promedio más altos, como era de esperarse.")
 
 
-# --- Gráfica 2: Relación entre Precio y Kilometraje ---
+#Gráfica 2: Relación entre Precio y Kilometraje 
 st.header("Relación entre Precio y Kilometraje")
 fig_odometer = px.scatter(df, x="odometer", y="price", title="Precio vs Kilometraje", opacity=0.5)
 st.plotly_chart(fig_odometer)
 st.markdown("**Insight:** Los vehículos más recientes tienden a tener precios promedio más altos, como era de esperarse.")
 
 
-
-# --- Gráfica 3: Relación entre Precio y Condición del Vehículo ---
+#Gráfica 3: Relación entre Precio y Condición del Vehículo 
 st.header("Relación entre Precio y Condición del Vehículo")
 fig_condition = px.box(df, x="condition", y="price", title="Precio vs Condición del Vehículo")
 st.plotly_chart(fig_condition)
 st.markdown("**Insight:** Los vehículos en mejor estado(‘excellent’ y ‘like new’) tienen un precio claramente más alto, lo cual es consistente con lo esperado.")
 
 #Conclusión general de mi análisis y proyecto
-st.header("Conclusiones Finales")
+st.header("Conclusiones Finales") 
 st.markdown("""
 Este análisis permite observar cómo diferentes características influyen en el precio de los vehículos usados:
 
